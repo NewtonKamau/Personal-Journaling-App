@@ -4,7 +4,7 @@ import { createUser, findUserByUsername } from "../models/Users";
 import bcrypt from "bcryptjs";
 
 export const register = async (req: Request, res: Response) => {
-  console.log("the request", req.body);
+ 
   try {
     const user = await createUser(req.body);
     res.status(201).json(user);
@@ -17,4 +17,18 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
+export const login = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+  const user = await findUserByUsername(username);
 
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({ error: "Invalid username or password" });
+  }
+
+  const token = jwt.sign(
+    { userId: user.id },
+    process.env.JWT_SECRET as string,
+    { expiresIn: "1h" }
+  );
+  res.json({ userName: user.username, token, success: "You are logged in." });
+};
