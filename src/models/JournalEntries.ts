@@ -28,4 +28,15 @@ export const createJournalEntry = async (
   return result.rows[0];
 };
 
+export const getJournalEntries = async (
+  userId: number
+): Promise<JournalEntry[]> => {
+  const result = await pool.query(
+    `SELECT * FROM journal_entries WHERE user_id = $1`,
+    [userId]
+  );
+  return result.rows;
+};
+
+
 
