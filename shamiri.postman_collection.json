@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "5c9d2875-eac3-4f78-b332-5a2b3653a695",
+		"name": "shamiri",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4183936"
+	},
+	"item": [
+		{
+			"name": "Journal Entry",
+			"item": [
+				{
+					"name": "Save Journal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyMDY4MzUyMywiZXhwIjoxNzIwNjg3MTIzfQ.f_vaBzWUzK4EgQw8FnZF9jkYf2MyvRD-Fw_dvDGxUU0"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"journal title one\",\r\n    \"content\":\"This is the first content\",\r\n    \"category\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/journal/entries"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Journals",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyMDY4NDM1NCwiZXhwIjoxNzIwNjg3OTU0fQ.gFJKhENApgl7ABp_fBbVVtIPrqTrO9r7IhitH2TtDwA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/journal/entries"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Journal By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyMDY4NDM1NCwiZXhwIjoxNzIwNjg3OTU0fQ.gFJKhENApgl7ABp_fBbVVtIPrqTrO9r7IhitH2TtDwA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/journal/entries/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Jounal By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyMDY4NDM1NCwiZXhwIjoxNzIwNjg3OTU0fQ.gFJKhENApgl7ABp_fBbVVtIPrqTrO9r7IhitH2TtDwA"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"title\": \"journal title one updated\",\r\n     \"content\":\"this is an update\",\r\n     \"category\":\"personal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/journal/entries/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Jounal By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Summary",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyMDY5NTU0NiwiZXhwIjoxNzIwNjk5MTQ2fQ.fdhxdJIfwe6NCa63j_XragNznT-jCt62ZVGeO0ONTLw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/summary?period=daily",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"summary"
+							],
+							"query": [
+								{
+									"key": "period",
+									"value": "daily"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"tester2\",\r\n    \"password\":\"password\",\r\n    \"email\":\"tester2@tester2.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/users/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"username\":\"test\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/users/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcyMDY3ODIzOSwiZXhwIjoxNzIwNjgxODM5fQ.rwsN26QpZvlSlW1gTVARMFHx8hTnNeNn6ucZic6n89g"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/users/tester2"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcyMDY3ODIzOSwiZXhwIjoxNzIwNjgxODM5fQ.rwsN26QpZvlSlW1gTVARMFHx8hTnNeNn6ucZic6n89g"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcyMDY3ODIzOSwiZXhwIjoxNzIwNjgxODM5fQ.rwsN26QpZvlSlW1gTVARMFHx8hTnNeNn6ucZic6n89g"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/users"
+			},
+			"response": []
+		}
+	]
+}
