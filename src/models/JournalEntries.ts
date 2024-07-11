@@ -62,3 +62,13 @@ export const updateJournalEntry = async (
   return result.rows[0] || null;
 };
 
+export const deleteJournalEntry = async (
+  id: number,
+  userId: number
+): Promise<boolean> => {
+  const result = await pool.query(
+    `DELETE FROM journal_entries WHERE id = $1 AND user_id = $2`,
+    [id, userId]
+  );
+  return (result.rowCount ?? 0) > 0;
+};

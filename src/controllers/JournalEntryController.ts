@@ -4,6 +4,7 @@ import {
   getJournalEntries,
   getJournalEntryById,
   updateJournalEntry,
+  deleteJournalEntry,
 } from "../models/JournalEntries";
 import { JwtPayload } from "../types/jwtPayload";
 
@@ -95,6 +96,34 @@ export const updateEntry = async (req: Request, res: Response) => {
         .json({ error: "Journal entry not found or not authorized to update" });
     }
     res.json(updatedEntry);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: "Unknown error occurred" });
+    }
+  }
+};
+
+/*
+delete an entry by id
+DELETE /api/journal/entries/:id
+*/
+export const deleteEntry = async (req: Request, res: Response) => {
+  try {
+    if (!req.user || typeof req.user === "string") {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    const deleted = await deleteJournalEntry(
+      parseInt(req.params.id, 10),
+      (req.user as JwtPayload).userId
+    );
+    if (!deleted) {
+      return res
+        .status(404)
+        .json({ error: "Journal entry not found or not authorized to delete" });
+    }
+    res.json({ message: "Journal entry deleted successfully" });
   } catch (err) {
     if (err instanceof Error) {
       res.status(500).json({ error: err.message });
