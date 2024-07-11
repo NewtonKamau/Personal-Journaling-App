@@ -126,6 +126,8 @@ Query Parameters: ?period=daily or ?period=weekly or ?period=monthly
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Sample Response from api
+https://api.postman.com/collections/4183936-5c9d2875-eac3-4f78-b332-5a2b3653a695?access_key=your_key
 
 ## License
 
