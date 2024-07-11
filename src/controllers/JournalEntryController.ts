@@ -3,6 +3,7 @@ import {
   createJournalEntry,
   getJournalEntries,
   getJournalEntryById,
+  updateJournalEntry,
 } from "../models/JournalEntries";
 import { JwtPayload } from "../types/jwtPayload";
 
@@ -72,5 +73,33 @@ export const getEntry = async (req: Request, res: Response) => {
   }
 };
 
+/*
+update an entry by id
+PUT /api/journal/entries/:id
+*/
 
 
+export const updateEntry = async (req: Request, res: Response) => {
+  try {
+    if (!req.user || typeof req.user === "string") {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    const updatedEntry = await updateJournalEntry(
+      parseInt(req.params.id, 10),
+      (req.user as JwtPayload).userId,
+      req.body
+    );
+    if (!updatedEntry) {
+      return res
+        .status(404)
+        .json({ error: "Journal entry not found or not authorized to update" });
+    }
+    res.json(updatedEntry);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: "Unknown error occurred" });
+    }
+  }
+};

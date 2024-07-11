@@ -49,4 +49,16 @@ export const getJournalEntryById = async (
   return result.rows[0] || null;
 };
 
+export const updateJournalEntry = async (
+  id: number,
+  userId: number,
+  entry: Partial<JournalEntry>
+): Promise<JournalEntry | null> => {
+  const result = await pool.query(
+    `UPDATE journal_entries SET title = $1, content = $2, category = $3, updated_at = NOW() 
+     WHERE id = $4 AND user_id = $5 RETURNING *`,
+    [entry.title, entry.content, entry.category, id, userId]
+  );
+  return result.rows[0] || null;
+};
 
