@@ -38,5 +38,15 @@ export const getJournalEntries = async (
   return result.rows;
 };
 
+export const getJournalEntryById = async (
+  id: number,
+  userId: number
+): Promise<JournalEntry | null> => {
+  const result = await pool.query(
+    `SELECT * FROM journal_entries WHERE id = $1 AND user_id = $2`,
+    [id, userId]
+  );
+  return result.rows[0] || null;
+};
 
 

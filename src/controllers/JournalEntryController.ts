@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   createJournalEntry,
   getJournalEntries,
+  getJournalEntryById,
 } from "../models/JournalEntries";
 import { JwtPayload } from "../types/jwtPayload";
 
@@ -44,6 +45,32 @@ export const getEntries = async (req: Request, res: Response) => {
   }
 };
 
+/* 
+Get a specific entry by ID
+GET /api/journal/entries/:id
+*/
+
+export const getEntry = async (req: Request, res: Response) => {
+  try {
+    if (!req.user || typeof req.user === "string") {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    const entry = await getJournalEntryById(
+      parseInt(req.params.id, 10),
+      (req.user as JwtPayload).userId
+    );
+    if (!entry) {
+      return res.status(404).json({ error: "Journal entry not found" });
+    }
+    res.json(entry);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: "Unknown error occurred" });
+    }
+  }
+};
 
 
 
