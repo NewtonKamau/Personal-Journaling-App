@@ -29,7 +29,7 @@ This is a backend service platform built with Express and TypeScript. It include
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/backend-service-platform.git
+   git clone https://github.com/NewtonKamau/Personal-Journaling-App.git
    cd backend-service-platform
 ## Install dependencies:
 
